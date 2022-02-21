@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+#nav-bar {
+    height: auto;
+    background-color:  #a8c3d7 !important; 
+    position: sticky;
+}
+
+.img-fill-screen{
+    width: 100%;
+    height: auto;
+}
+
+#container {
+    position: relative;
+}
+
+#form {
+    position: absolute;
+    top: 0;
+}
