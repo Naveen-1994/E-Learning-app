@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../Navbar";
 import axios from 'axios'
-import { useState } from "react";
 
-const Signup = (props) => {
+const Signup = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -22,7 +21,7 @@ const Signup = (props) => {
             }
         }
         console.log(formdata)
-        axios.post('https://dct-e-learning.herokuapp.com/api/admin/register', formdata)
+        axios.post("https://dct-e-learning.herokuapp.com/api/admin/register", formdata)
             .then((response) => {
                 console.log(response.data)
             })
@@ -52,6 +51,7 @@ const Signup = (props) => {
     return (
         <div>
             <Navbar />
+
             <div id="container">
                 <div id="fill-screen">
                     <img src={require('../images/landingBG.jpg')} width="600" height="400" className="img-fill-screen" />
@@ -69,7 +69,7 @@ const Signup = (props) => {
                         <input type="text" className="form-control" value={acName} name="acname" onChange={handlechange} placeholder="Enter Academy Name" />
                         <label>Website</label>
                         <input type="text" className="form-control" value={website} name="website" onChange={handlechange} placeholder="Enter Website" /> <br />
-                        <button type="submit" className="btn btn-outline-primary">Sign Up</button>
+                        <input type="submit" className="btn btn-outline-primary" />
                     </form>
                 </div>
             </div>

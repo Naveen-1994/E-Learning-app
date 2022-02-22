@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Navbar";
-import { Link } from "react-router-dom";
 import '../stylesheet/custom.css'
-import ladingBG from '../images/landingBG.jpg'
+import { useSelector } from "react-redux";
 
 
 const Homepage = (props) => {
+
 
     return (
         <div>
