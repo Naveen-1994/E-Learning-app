@@ -68,7 +68,7 @@ const Editadmin = (props) => {
                     <input type="text" className="form-control" value={acName} name="acname" onChange={handlechange} placeholder="Enter Academy Name" />
                     <label>Website</label>
                     <input type="text" className="form-control" value={website} name="website" onChange={handlechange} placeholder="Enter Website" /> <br />
-                    <input type="submit" className="btn btn-outline-primary" />
+                    <input type="submit" className="btn btn-outline-primary" /> <span>cancel button</span>
                 </form>
             </div>
         </div>

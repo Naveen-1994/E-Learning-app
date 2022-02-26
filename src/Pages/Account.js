@@ -30,49 +30,56 @@ const Account = (props) => {
                     </div>
                 ) :
                     (
-                        <div className="container-fluid">
-                            <div className="row m-2">
-                                {
-                                    Object.keys(adminDetails).length > 0 ? (
-                                        <div className="col-md-6">
-                                            <h4>User Details:</h4>
-                                            <table className="table table-hover">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Role:</td>
-                                                        <td>{adminDetails.role}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Email:</td>
-                                                        <td>{adminDetails.email}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Username:</td>
-                                                        <td>{adminDetails.username}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>ID:</td>
-                                                        <td>{adminDetails.academy.academyId}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Academy Name:</td>
-                                                        <td>{adminDetails.academy.name}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Website:</td>
-                                                        <td>{adminDetails.academy.website}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    ) :
-                                        null
-                                }
+                        Object.keys(adminDetails).length > 0 ? (
+                            <div className="container-fluid">
+                                <div className="row m-2">
+                                    {
+                                        Object.keys(adminDetails).length > 0 ? (
+                                            <div className="col-md-6">
+                                                <h4>User Details:</h4>
+                                                <table className="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Role:</td>
+                                                            <td>{adminDetails.role}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Email:</td>
+                                                            <td>{adminDetails.email}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Username:</td>
+                                                            <td>{adminDetails.username}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>ID:</td>
+                                                            <td>{adminDetails.academy.academyId}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Academy Name:</td>
+                                                            <td>{adminDetails.academy.name}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Website:</td>
+                                                            <td>{adminDetails.academy.website}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        ) :
+                                            null
+                                    }
+                                </div>
+                                <div className="row m-2">
+                                    <p>Something's missing? Update here <i type="button" onClick={handletoggle} className="bi bi-pencil"></i> </p>
+                                </div>
                             </div>
-                            <div className="row m-2">
-                                <p>Something's missing? Update here <i type="button" onClick={handletoggle} className="bi bi-pencil"></i> </p>
+                        ) : (
+                            <div className="container">
+                                <div className="spinner-border m-5" role="status"></div>
                             </div>
-                        </div>
+                        )
+
                     )
             }
         </div>

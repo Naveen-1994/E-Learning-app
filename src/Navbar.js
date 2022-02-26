@@ -29,6 +29,9 @@ const Navbar = () => {
                         (
                             <ul className="navbar-nav me-5">
                                 <li className="nav-item">
+                                    <a className="nav-link" href="/admin/students"><i className="bi bi-people-fill"></i>Students</a>
+                                </li>
+                                <li className="nav-item">
                                     <a className="nav-link" href="/admin/account"><i className="bi bi-person-circle"></i>Account</a>
                                 </li>
                                 <li className="nav-item">

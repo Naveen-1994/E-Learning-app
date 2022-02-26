@@ -3,6 +3,7 @@ import Homepage from "./Pages/Home";
 import Login from "./Pages/Login"
 import Signup from "./Pages/Signup";
 import Account from "./Pages/Account";
+import StudentsPage from "./Pages/Students";
 import { Route } from "react-router-dom";
 
 const App = (props) => {
@@ -13,6 +14,7 @@ const App = (props) => {
             <Route path="/student/login" component={Login} exact={true}></Route>
             <Route path="/admin/signup" component={Signup} exact={true}></Route>
             <Route path="/admin/account" component={Account} exact={true}></Route>
+            <Route path="/admin/students" component={StudentsPage} exact={true}></Route>
         </div>
     )
 }
