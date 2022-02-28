@@ -19,8 +19,7 @@ const StudentsPage = () => {
 
     useEffect(() => {
         dispatch(getStudentdetails())
-    }, [])
-
+    }, [student])
     const handleclick = () => {
         setaddFlag(!addFlag)
     }
@@ -29,7 +28,6 @@ const StudentsPage = () => {
         setEditflag(!editFlag)
         setStudent(students[i])
     }
-    console.log(students)
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure ?") === true) {
@@ -128,34 +126,39 @@ const StudentsPage = () => {
                                 </div>
                             )
                     }
-                    <div className="col-md-4">
-                        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div className="modal-dialog modal-dialog-centered">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h5 className="modal-title" id="staticBackdropLabel">{stDetails.name}</h5>
-                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div className="modal-body">
-                                        <span><b>ID:</b> {stDetails._id}</span> <br />
-                                        <span><b>Email:</b> {stDetails.email}</span> <br />
-                                        <span><b>Role:</b> {stDetails.role}</span> <br />
-                                        <span><b>Courses:</b></span> <br />
-                                        <ul>
-                                            {
-                                                stDetails.courses.map((course, i) => {
-                                                    return <li key={i}>{course.name}</li>
-                                                })
-                                            }
-                                        </ul>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {
+                        Object.keys(stDetails).length > 0 ? (
+                            <div className="col-md-4">
+                                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div className="modal-dialog modal-dialog-centered">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title" id="staticBackdropLabel">{stDetails.name}</h5>
+                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div className="modal-body">
+                                                <span><b>ID:</b> {stDetails._id}</span> <br />
+                                                <span><b>Email:</b> {stDetails.email}</span> <br />
+                                                <span><b>Role:</b> {stDetails.role}</span> <br />
+                                                <span><b>Courses:</b></span> <br />
+                                                <ul>
+                                                    {
+                                                        stDetails.courses.map((course, i) => {
+                                                            return <li key={i}>{course.name}</li>
+                                                        })
+                                                    }
+
+                                                </ul>
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        ) : null
+                    }
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -29,10 +29,13 @@ const Navbar = () => {
                         (
                             <ul className="navbar-nav me-5">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/admin/students"><i className="bi bi-people-fill"></i>Students</a>
+                                    <Link to="/admin/courses" className="nav-link" style={{ textDecoration: "none" }}><i className="bi bi-journals"></i>Courses</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/admin/account"><i className="bi bi-person-circle"></i>Account</a>
+                                    <Link to="/admin/students" className="nav-link" style={{ textDecoration: "none" }}><i className="bi bi-people-fill"></i>Students</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/admin/account" className="nav-link" style={{ textDecoration: "none" }} ><i className="bi bi-person-circle"></i>Account</Link>
                                 </li>
                                 <li className="nav-item">
                                     <a type="button" className="nav-link" onClick={handleclick}><i className="bi bi-box-arrow-right"></i>Logout</a>
