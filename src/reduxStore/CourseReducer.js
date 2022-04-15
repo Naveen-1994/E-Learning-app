@@ -1,8 +1,8 @@
 const initialvalue = []
 
-const StudentReducer = (state = initialvalue, action) => {
+const CourseReducer = (state = initialvalue, action) => {
     switch (action.type) {
-        case "ADD_STUDENTS": {
+        case "ADD_COURSE": {
             return action.payload
         }
         default: {
@@ -11,4 +11,4 @@ const StudentReducer = (state = initialvalue, action) => {
     }
 }
 
-export default StudentReducer
+export default CourseReducer

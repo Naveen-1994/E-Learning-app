@@ -10,9 +10,19 @@ const Account = (props) => {
     const adminDetails = useSelector((state) => {
         return state.userdetail
     })
+    console.log(adminDetails)
 
     useEffect(() => {
-        dispatch(getAdmindetails())
+        let adminURL = ''
+        if (localStorage.length > 0) {
+            if (localStorage.getItem('role').includes('admin')) {
+                adminURL = 'https://dct-e-learning.herokuapp.com/api/admin/account'
+            }
+            else if (localStorage.getItem('role').includes('student')) {
+                adminURL = `https://dct-e-learning.herokuapp.com/api/students/${localStorage.getItem('Id')}`
+            }
+        }
+        dispatch(getAdmindetails(adminURL))
     }, [editflag])
 
     const handletoggle = () => {
@@ -38,32 +48,55 @@ const Account = (props) => {
                                             <div className="col-md-6">
                                                 <h4>User Details:</h4>
                                                 <table className="table table-hover">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Role:</td>
-                                                            <td>{adminDetails.role}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Email:</td>
-                                                            <td>{adminDetails.email}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Username:</td>
-                                                            <td>{adminDetails.username}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ID:</td>
-                                                            <td>{adminDetails.academy.academyId}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Academy Name:</td>
-                                                            <td>{adminDetails.academy.name}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Website:</td>
-                                                            <td>{adminDetails.academy.website}</td>
-                                                        </tr>
-                                                    </tbody>
+                                                    {
+                                                        localStorage.getItem('role').includes('admin') ? (
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Role:</td>
+                                                                    <td>{adminDetails.role}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email:</td>
+                                                                    <td>{adminDetails.email}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Username:</td>
+                                                                    <td>{adminDetails.username}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>ID:</td>
+                                                                    <td>{adminDetails.academy.academyId}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Academy Name:</td>
+                                                                    <td>{adminDetails.academy.name}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Website:</td>
+                                                                    <td>{adminDetails.academy.website}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        ) : (
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Role:</td>
+                                                                    <td>{adminDetails.role}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email:</td>
+                                                                    <td>{adminDetails.email}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Username:</td>
+                                                                    <td>{adminDetails.name}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>ID:</td>
+                                                                    <td>{adminDetails._id}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        )
+                                                    }
                                                 </table>
                                             </div>
                                         ) :

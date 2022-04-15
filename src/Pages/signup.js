@@ -1,52 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "../Navbar";
 import axios from 'axios'
+import { useFormik } from "formik";
+import * as Yup from 'yup'
 
 const Signup = () => {
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [acName, setAcname] = useState('')
-    const [website, setWebsite] = useState('')
 
-    const handlesubmit = (e) => {
-        e.preventDefault()
-        const formdata = {
-            username: username,
-            email: email,
-            password: password,
-            academy: {
-                name: acName,
-                website: website
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            email: '',
+            password: '',
+            acname: '',
+            website: ''
+        },
+        validationSchema: Yup.object({
+            username: Yup.string().required("Required"),
+            email: Yup.string().email('Email is not valid').required("Required"),
+            password: Yup.string().required("Required"),
+            acname: Yup.string().required("Required"),
+            website: Yup.string().optional()
+        }),
+        onSubmit: (values) => {
+            const formdata = {
+                username: values.username,
+                email: values.email,
+                password: values.password,
+                academy: {
+                    name: values.acname,
+                    webiste: values.website
+                }
             }
+            axios.post("https://dct-e-learning.herokuapp.com/api/admin/register", formdata)
+                .then((response) => {
+                    console.log(response.data)
+                })
+                .catch((err) => {
+                    console.log(err.message)
+                })
         }
-        console.log(formdata)
-        axios.post("https://dct-e-learning.herokuapp.com/api/admin/register", formdata)
-            .then((response) => {
-                console.log(response.data)
-            })
-            .catch((err) => {
-                console.log(err.message)
-            })
-        setAcname('')
-        setEmail('')
-        setPassword('')
-        setWebsite('')
-        setUsername('')
-    }
-
-    const handlechange = (e) => {
-        if (e.target.name === 'username')
-            setUsername(e.target.value)
-        else if (e.target.name === 'email')
-            setEmail(e.target.value)
-        else if (e.target.name === 'password')
-            setPassword(e.target.value)
-        else if (e.target.name === 'acname')
-            setAcname(e.target.value)
-        else if (e.target.name === 'website')
-            setWebsite(e.target.value)
-    }
+    })
 
     return (
         <div>
@@ -57,18 +50,58 @@ const Signup = () => {
                     <img src={require('../images/landingBG.jpg')} width="600" height="400" className="img-fill-screen" />
                 </div>
                 <div className="col-md-3 pt-3 ms-3" id="form">
-                    <form onSubmit={handlesubmit}>
+                    <form onSubmit={formik.handleSubmit}>
                         <label>Username*</label>
-                        <input type="text" className="form-control" value={username} name="username" onChange={handlechange} placeholder="Enter Username" />
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={formik.values.username}
+                            name="username"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            placeholder="Enter Username" />
+                        {formik.touched.username && formik.errors.username ? <p style={{ color: 'red' }}>{formik.errors.username}</p> : null}
                         <label>Email*</label>
-                        <input type="text" className="form-control" value={email} name="email" onChange={handlechange} placeholder="Enter Email Id" />
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={formik.values.email}
+                            name="email"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            placeholder="Enter Email Id" />
+                        {formik.touched.email && formik.errors.email ? <p style={{ color: 'red' }}>{formik.errors.email}</p> : null}
                         <label>Password*</label>
-                        <input type="text" className="form-control" value={password} name="password" onChange={handlechange} placeholder="Set Password" /> <br />
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={formik.values.password}
+                            name="password"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            placeholder="Set Password" />
+                        {formik.touched.password && formik.errors.password ? <p style={{ color: 'red' }}>{formik.errors.password}</p> : null} <br />
                         <label>Academy Details</label> <br />
                         <label>Name*</label>
-                        <input type="text" className="form-control" value={acName} name="acname" onChange={handlechange} placeholder="Enter Academy Name" />
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={formik.values.acname}
+                            name="acname"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            placeholder="Enter Academy Name" />
+                        {formik.touched.acname && formik.errors.acname ? <p style={{ color: 'red' }}>{formik.errors.acname}</p> : null}
                         <label>Website</label>
-                        <input type="text" className="form-control" value={website} name="website" onChange={handlechange} placeholder="Enter Website" /> <br />
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={formik.values.website}
+                            name="website"
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            placeholder="Enter Website" />
+                        {formik.touched.website && formik.errors.website ? <p style={{ color: 'red' }}>{formik.errors.website}</p> : null} <br />
                         <input type="submit" className="btn btn-outline-primary" />
                     </form>
                 </div>

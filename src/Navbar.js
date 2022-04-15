@@ -31,9 +31,16 @@ const Navbar = () => {
                                 <li className="nav-item">
                                     <Link to="/admin/courses" className="nav-link" style={{ textDecoration: "none" }}><i className="bi bi-journals"></i>Courses</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link to="/admin/students" className="nav-link" style={{ textDecoration: "none" }}><i className="bi bi-people-fill"></i>Students</Link>
-                                </li>
+                                {
+                                    localStorage.getItem('role') ? (
+
+                                        localStorage.getItem('role').includes('admin') ? (
+                                            <li className="nav-item">
+                                                <Link to="/admin/students" className="nav-link" style={{ textDecoration: "none" }}><i className="bi bi-people-fill"></i>Students</Link>
+                                            </li>) : null
+
+                                    ) : null
+                                }
                                 <li className="nav-item">
                                     <Link to="/admin/account" className="nav-link" style={{ textDecoration: "none" }} ><i className="bi bi-person-circle"></i>Account</Link>
                                 </li>

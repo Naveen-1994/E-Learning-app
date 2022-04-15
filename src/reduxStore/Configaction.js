@@ -1,4 +1,5 @@
 import axios from "axios"
+
 export const addToken = (token) => {
     return {
         type: 'ADD_TOKEN',
@@ -6,9 +7,9 @@ export const addToken = (token) => {
     }
 }
 
-export const getAdmindetails = () => {
+export const getAdmindetails = (adminURL) => {
     return (dispatch) => {
-        axios.get('https://dct-e-learning.herokuapp.com/api/admin/account', {
+        axios.get(adminURL, {
             headers: {
                 'Authorization': localStorage.getItem('token')
             }
@@ -65,3 +66,56 @@ export const addstudentdetails = (st_details) => {
         payload: st_details
     }
 }
+
+export const getCourseDeatail = () => {
+    return (dispatch) => {
+        axios.get("https://dct-e-learning.herokuapp.com/api/courses", {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                if (response.data.hasOwnProperty("errors"))
+                    alert(response.data.errors)
+                else
+                    dispatch(addCourseDetails(response.data))
+            })
+            .catch((err) => {
+                console.log(err.message)
+            })
+    }
+}
+
+export const addCourseDetails = (courses) => {
+    return {
+        type: "ADD_COURSE",
+        payload: courses
+    }
+}
+
+export const getLectureDetails = (id) => {
+    return (dispatch) => {
+        axios.get(`https://dct-e-learning.herokuapp.com/api/courses/${id}/lectures`, {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                if (response.data.hasOwnProperty("errors"))
+                    alert(response.data.errors)
+                else
+                    dispatch(addLectureDetails(response.data))
+            })
+            .catch((err) => {
+                console.log(err.message)
+            })
+    }
+}
+
+export const addLectureDetails = (lectures) => {
+    return {
+        type: "ADD_LECTURE",
+        payload: lectures
+    }
+}
+

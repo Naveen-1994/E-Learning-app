@@ -5,7 +5,7 @@ import Addstudent from "../component/addStudent";
 import EditStudent from "../component/editStudent";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentdetails } from "../reduxStore/Configaction";
-
+import EnrollStudent from "../component/enrollStudent";
 
 const StudentsPage = () => {
     const dispatch = useDispatch()
@@ -16,10 +16,13 @@ const StudentsPage = () => {
     const [stDetails, setDetails] = useState({})
     const [addFlag, setaddFlag] = useState(false)
     const [editFlag, setEditflag] = useState(false)
+    const [enroll, setEnroll] = useState(false)
+    const [studenName, setName] = useState('')
+    const [studentID, setstudentID] = useState('')
 
     useEffect(() => {
         dispatch(getStudentdetails())
-    }, [student])
+    }, [])
     const handleclick = () => {
         setaddFlag(!addFlag)
     }
@@ -28,6 +31,7 @@ const StudentsPage = () => {
         setEditflag(!editFlag)
         setStudent(students[i])
     }
+
 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure ?") === true) {
@@ -39,6 +43,9 @@ const StudentsPage = () => {
                 .then((response) => {
                     if (response.data.hasOwnProperty('errors'))
                         alert(response.data.errors)
+                    else {
+                        dispatch(getStudentdetails())
+                    }
                 })
                 .catch((err) => {
                     alert(err.message)
@@ -48,6 +55,12 @@ const StudentsPage = () => {
 
     const addDetails = (i) => {
         setDetails(students[i])
+    }
+
+    const handleEnroll = (name, id) => {
+        setEnroll(!enroll)
+        setstudentID(id)
+        setName(name)
     }
 
     return (
@@ -75,10 +88,10 @@ const StudentsPage = () => {
                         </div>
                     ) : null
                 }
-                <div className="row">
+                <div className="row d-flex justify-content">
                     {
                         students.length > 0 ? (
-                            <div className="col-md-4">
+                            <div className="col-md-6">
                                 <table className="table m-2">
                                     <thead>
                                         <tr>
@@ -109,6 +122,11 @@ const StudentsPage = () => {
                                                                 handleDelete(student._id)
                                                             }}></i>
                                                         </td>
+                                                        <td>
+                                                            <i className="bi bi-book" type="button" onClick={() => {
+                                                                handleEnroll(student.name, student._id)
+                                                            }}></i>
+                                                        </td>
                                                     </tr>
                                                 )
                                             })
@@ -125,6 +143,11 @@ const StudentsPage = () => {
                                     </div>
                                 </div>
                             )
+                    }
+                    {
+                        enroll ? (
+                            <EnrollStudent id={studentID} name={studenName} handleEnroll={handleEnroll} />
+                        ) : null
                     }
                     {
                         Object.keys(stDetails).length > 0 ? (
@@ -161,7 +184,7 @@ const StudentsPage = () => {
                     }
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
